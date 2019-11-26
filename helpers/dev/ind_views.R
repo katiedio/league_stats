@@ -39,17 +39,16 @@ plotly::ggplotly(
     ggplot(aes(x = Date)) +
     geom_bar(aes(y = Score, 
                  fill = Game,
-                 alpha = 0.8), 
+                 alpha = 0.7), 
              stat = "sum", 
              position = position_dodge()) + 
     geom_line(aes(y = `League Average`),
               color = "#5B1A18",
               linetype = "dashed",
-              alpha = 0.95,
               size = 1.2) +
     geom_point(aes(y = `Week Average`),
               shape = 6,
-              size = 2,
+              size = 2.5,
               color = "#D67236") +
     theme_minimal() +
     scale_fill_manual(values = wes_palette(name = "GrandBudapest1")) 
