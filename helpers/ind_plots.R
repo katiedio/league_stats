@@ -1,35 +1,7 @@
-bowler_dat <- read.csv("./data/katie-dio-history.csv")
-
-
-
-library(dplyr)
-library(ggplot2)
-library(wesanderson)
-library(scales)
-
-# bowler score by game by week
-
+# input: data from Bowler History on LeagueSecretary.com
+# output: long format, scores and averages by Date and Game for each week
 bowler_long_dat <- function(bowler_dat) {
-  if (sum(
-    colnames(bowler_dat) %ni% c(
-      "ï..Week",
-      "Date",
-      "Gm1",
-      "Gm2",
-      "Gm3",
-      "SS",
-      "HCP",
-      "HS",
-      "Avg.br...Before",
-      "Avg.br...After",
-      "Todays.br...Avg",
-      "X....br...Avg"
-    )
-  ) > 0)
-  stop(
-    "Error: Unknown columns in dataset. Did you download the Bowler History data from LeagueSecretary.com?"
-  )
-  
+
   dat <- bowler_dat %>%
     select(Date, Gm1, Gm2, Gm3, Todays.br...Avg, Avg.br...Before) %>%
     mutate(Date = as.Date(Date, format = "%m/%d/%Y")) %>%
@@ -47,7 +19,8 @@ bowler_long_dat <- function(bowler_dat) {
   return(dat)
 }
 
-
+# input: data from Bowler History on LeagueSecretary.com
+# output: plot of scores and averages by Date and Game
 bowler_wk_plt <- function(bowler_dat) {
   plt_dat <- bowler_long_dat(bowler_dat)
   
@@ -109,5 +82,3 @@ bowler_wk_plt <- function(bowler_dat) {
   
   return(plty)
 }
-
-bowler_wk_plt(bowler_dat)

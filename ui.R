@@ -1,22 +1,13 @@
 library(shiny)
 library(shinythemes)
-
+library(plotly)
 # Define UI for application that draws a histogram
 ui <- navbarPage("Bowling League Statistics",
         theme = shinytheme("yeti"),
         
         tabPanel("Setup",
-                 sidebarLayout(
-                     
-                     # Sidebar with a slider input
-                     sidebarPanel(
-                         fileInput("bowler_dat", "Choose CSV File",
-                                   accept = c(".csv"),
-                                   multiple = TRUE
-                         )),
-                     
-                     # Show a plot of the generated distribution
-                     mainPanel(
+                 fluidPage(
+
                          h3("User Guide"),
                          
                          p("Welcome to the Bowling League Statistics application! 
@@ -32,10 +23,9 @@ ui <- navbarPage("Bowling League Statistics",
                          
                          p("3. Download a csv file with the data of every bowler of interest"),
                          
-                         p("4. Upload the data in the sidebar to the left"),
-                         tableOutput("contents")
+                         p("4. Upload the data in the sidebar to the left")
 
-                     )
+                     
                  )
         ),
         
@@ -43,12 +33,16 @@ ui <- navbarPage("Bowling League Statistics",
                  sidebarLayout(
                      
                      sidebarPanel(
-                         # Inputs excluded for brevity
+                         fileInput("bowler_dat", "Choose CSV File",
+                                            accept = c(".csv"),
+                                            multiple = TRUE),
+                         submitButton(text = "Submit")
                      ),
                      
                      mainPanel(
                          tabsetPanel(
-                             tabPanel("Plot"), 
+                             tabPanel("Plot",
+                                      plotlyOutput("bowler_wk_plt")), 
                              tabPanel("Summary"), 
                              tabPanel("Table")
                          )
