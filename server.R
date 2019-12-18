@@ -5,6 +5,7 @@ library(wesanderson)
 library(scales)
 library(plotly)
 
+
 source("./helpers/utils.R")
 source("./helpers/ind_plots.R")
 
@@ -23,11 +24,12 @@ bowler_dat <- reactive({
 
 })
 
+observeEvent(input$submit_button,
 output$bowler_wk_plt <- renderPlotly({
     require(bowler_dat())
     bowler_wk_plt(bowler_dat())
 })
-
+)
 }
 
 

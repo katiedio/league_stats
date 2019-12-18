@@ -27,7 +27,8 @@ bowler_long_dat <- function(bowler_dat) {
     )
   ) > 0)
   stop(
-    "Error: Unknown columns in dataset. Did you download the Bowler History data from LeagueSecretary.com?"
+    "Error: Unknown columns in dataset. Did you download the Bowler 
+    History data from LeagueSecretary.com?"
   )
   
   dat <- bowler_dat %>%
